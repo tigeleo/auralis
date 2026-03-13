@@ -1,0 +1,14 @@
+[
+    {
+        "relation": [
+            "delegate_permission/common.handle_all_urls"
+        ],
+        "target": {
+            "namespace": "android_app",
+            "package_name": "app.vercel.dist_six_inky_71.twa",
+            "sha256_cert_fingerprints": [
+                "32:B1:57:82:5B:B7:A1:A2:21:D9:8C:C2:5D:CE:90:9C:76:61:78:05:A4:4B:CA:9F:17:C2:BD:9B:27:86:29:4A"
+            ]
+        }
+    }
+]

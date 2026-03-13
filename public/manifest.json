@@ -1,0 +1,17 @@
+{
+  "name": "Auralis",
+  "short_name": "Auralis",
+  "description": "Premium Audiobook Player by DBD Labs",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#0f0e17",
+  "theme_color": "#0f0e17",
+  "icons": [
+    {
+      "src": "/logo.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}

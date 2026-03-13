@@ -1,0 +1,39 @@
+plugins {
+    id 'com.android.application'
+}
+
+android {
+    namespace 'app.vercel.dist_six_inky_71.twa'
+    compileSdk 34
+
+    defaultConfig {
+        applicationId "app.vercel.dist_six_inky_71.twa"
+        minSdk 21
+        targetSdk 34
+        versionCode 1
+        versionName "1.0"
+
+        manifestPlaceholders = [
+                hostName       : "dist-six-inky-71.vercel.app",
+                defaultUrl     : "https://dist-six-inky-71.vercel.app",
+                launcherName   : "Auralis",
+                assetStatements: '[{ "relation": ["delegate_permission/common.handle_all_urls"], "target": {"namespace": "web", "site": "https://dist-six-inky-71.vercel.app"}}]'
+        ]
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+}
+
+dependencies {
+    implementation 'androidx.appcompat:appcompat:1.6.1'
+    implementation 'com.google.androidbrowserhelper:androidbrowserhelper:2.5.0'
+}
