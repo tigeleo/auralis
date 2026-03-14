@@ -1,14 +1,10 @@
-[
-    {
-        "relation": [
-            "delegate_permission/common.handle_all_urls"
-        ],
-        "target": {
-            "namespace": "android_app",
-            "package_name": "app.vercel.dist_six_inky_71.twa",
-            "sha256_cert_fingerprints": [
-                "32:B1:57:82:5B:B7:A1:A2:21:D9:8C:C2:5D:CE:90:9C:76:61:78:05:A4:4B:CA:9F:17:C2:BD:9B:27:86:29:4A"
-            ]
-        }
-    }
-]
+[{
+  "relation": ["delegate_permission/common.handle_all_urls"],
+  "target": {
+    "namespace": "android_app",
+    "package_name": "app.vercel.dist_six_inky_71.twa",
+    "sha256_cert_fingerprints": [
+      "8E:FB:EC:81:BE:C6:3F:34:6E:19:10:AA:9C:15:5D:40:CF:36:8A:A4:F1:E1:56:12:FE:C1:6D:13:6C:81:5F:8E"
+    ]
+  }
+}]
