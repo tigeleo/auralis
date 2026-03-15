@@ -81,15 +81,6 @@ export async function readDirectoryHandle(dirHandle) {
   return results;
 }
 
-/**
- * Extract books from files.
- * Accepts either:
- * - FileList (from <input webkitdirectory>) where each File has webkitRelativePath
- * - Array of { file: File, path: string } from readDirectoryHandle
- *
- * @param {FileList|Array<{file: File, path: string}>} input
- * @returns {Book[]}
- */
 export function extractBooks(input) {
   const bookMap = new Map();
   let rootFolderName = '';
@@ -97,7 +88,10 @@ export function extractBooks(input) {
   // Normalize input to iterable of { file, path }
   const items = Array.from(input).map(item => {
     if (item instanceof File) {
-      return { file: item, path: item.webkitRelativePath || item.name };
+      // On some mobile devices (Android Chrome), webkitRelativePath is empty.
+      // We fall back to item.name, meaning it will sit in the root.
+      const path = item.webkitRelativePath || item.name;
+      return { file: item, path: path };
     }
     return item; // already { file, path }
   });
@@ -106,17 +100,26 @@ export function extractBooks(input) {
     const ext = file.name.split('.').pop().toLowerCase();
     if (!AUDIO_EXTENSIONS.has(ext)) continue;
 
-    const parts = path.split('/');
+    // Split by slash and remove any empty string segments
+    const parts = path.split('/').filter(Boolean);
 
-    if (!rootFolderName && parts.length > 0) {
-      rootFolderName = parts[0];
-    }
-
+    // If there's only 1 part, it's just the file name (no hierarchy).
     let bookTitle;
-    if (parts.length <= 2) {
-      bookTitle = rootFolderName || 'Audiobook';
+    if (parts.length === 1) {
+       bookTitle = 'Audiobook';
     } else {
-      bookTitle = parts[1];
+       // First part is usually the top-level directory selected by the user.
+       if (!rootFolderName) {
+         rootFolderName = parts[0];
+       }
+       
+       if (parts.length === 2) {
+         // e.g. "MyBook/01.mp3" -> book title is "MyBook"
+         bookTitle = parts[0];
+       } else {
+         // e.g. "Library/MyBook/01.mp3" -> book title is "MyBook"
+         bookTitle = parts[1];
+       }
     }
 
     if (!bookMap.has(bookTitle)) {
